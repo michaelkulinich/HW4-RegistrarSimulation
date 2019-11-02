@@ -9,8 +9,8 @@ class Window
     ~Window();
 
     int getOpenWindows();
-    
+
     int idleTime;
     int arrSize;
-    int windowArray[];
+    int *windowArray;
 };

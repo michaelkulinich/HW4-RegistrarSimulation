@@ -10,6 +10,10 @@ public:
 
 
         int getId();
+        int idleTime;
+        int windowTime;
+        int arrivalClick;
+
         int id;
-        
+
 };

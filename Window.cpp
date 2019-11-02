@@ -7,7 +7,7 @@ using namespace std;
 Window::Window(int numWindows)
 {
   int arrSize = numWindows;
-  int windowArray[numWindows];
+  windowArray = new int[numWindows];
 }
 
 Window::~Window()
@@ -26,4 +26,8 @@ int Window::getOpenWindows()
     }
   }
   return numOpen;
+}
+
+Window::fillWindow(){ //put in the student into the window
+
 }
