@@ -33,6 +33,9 @@ class Simulation {
         int openWindows;
     private:
         int totalStudentWaitTime;
+        int tenMinuteWaitTime;
+        int maxWaitTime;
+        int medianStudentWaitTime;
         string inputFile;
         int clockTick; // the clock tick of the simulation
         int numOpenWindows;
@@ -41,16 +44,10 @@ class Simulation {
         vector<int> vectorFileInfo; //a vector representation of the file
         vector<int> vectorTimePerStudent; //a vector of the time needed for each student in order
         vector<int> vectorTimeArrived; //a vector of the clock tick the student arrives in order
+        vector<int> vectorStudentWaitTimes;
         Window *myWindow;
         GenQueue<Student> *myQueue;
         Student *s;
-
-
-        Student *s1;
-        Student *s2;
-        Student *s3;
-        Student *s4;
-
 
 
 
