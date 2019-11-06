@@ -1,5 +1,6 @@
 #include "Simulation.h"
 #include <vector>
+#include <algorithm>
 //#include "Student.h"
 
 using namespace std;
@@ -13,7 +14,6 @@ CHange this Every where I do this
 */
 Simulation::Simulation(string inputFile){//input file
     this->inputFile = inputFile;
-    clockTick = 3;
 }
 Simulation::~Simulation(){
 
@@ -27,24 +27,58 @@ void Simulation::run(){
     createQueue();
     createWindow();
     int round = 1;
+    totalStudentWaitTime = 0;
+    tenMinuteWaitTime = 0;
+    maxWaitTime = 0;
+    clockTick = 0;
 
 
-//    while(true){
-
-
+    while(!myQueue->isEmpty()){
+        cout << "numWindows open " << myWindow->getNumOpenWindows() << endl;
+        cout << "ArrivalTick " << myQueue->peek()->arrivalTick << endl;
         //fill up the emtpy windows
-        while((!myQueue->isEmpty()) && (myWindow->getNumOpenWindows() != 0) && (myQueue->peek()->arrivalTick <= clockTick)){
+        while((myWindow->getNumOpenWindows() != 0) && (myQueue->peek()->arrivalTick <= clockTick)){
 
-                myWindow->fillWindow(myQueue->remove());
+            cout << "check " << round << endl;
+            round++;
+            //to find the median of all the wait times
+            vectorStudentWaitTimes.push_back(myQueue->peek()->arrivalTick);
+
+            //checking for max wait time
+            if(clockTick-(myQueue->peek()->arrivalTick) > maxWaitTime){
+                maxWaitTime = clockTick-(myQueue->peek()->arrivalTick);
+            }
+
+            //chekcing for number of students waiting over 10 minutes
+            if(clockTick-(myQueue->peek()->arrivalTick >= 10)){
+                tenMinuteWaitTime++;
+            }
+
+            //sum up the total student wait time
+            totalStudentWaitTime += (clockTick-myQueue->peek()->arrivalTick);
+            myWindow->fillWindow(myQueue->remove());
         }
         clockTick++;
+        for(int i = 0; i < myWindow->arrSize; ++i){
+            if(myWindow->windowArray[i] != 0){
+                myWindow->windowArray[i]--;
+            }
+        }
 
 
-//    }
+    }
 
-
+    cout << "check 1" << endl;
+    sort(vectorStudentWaitTimes.begin(), vectorStudentWaitTimes.end());
+    cout << "check 2" << endl;
+    int size = vectorStudentWaitTimes.size();   // might have to make this unsigned
+    //then find median
+    cout << "check 3" << endl;
+    medianStudentWaitTime = vectorStudentWaitTimes.at((size -1)/ 2);
+cout << "check 4" << endl;
 
     myWindow->printWindows();
+    cout << "clock tick" << clockTick << endl;
 
 }
 
