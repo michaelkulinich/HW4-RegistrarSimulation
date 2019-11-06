@@ -1,13 +1,19 @@
 #include "Simulation.h"
 #include <vector>
-//#include "Window.h"
 //#include "Student.h"
 
 using namespace std;
 
 
+
+
+/*
+myQueue->theList->front->data->timeNeeded
+CHange this Every where I do this
+*/
 Simulation::Simulation(string inputFile){//input file
     this->inputFile = inputFile;
+    clockTick = 0;
 }
 Simulation::~Simulation(){
 
@@ -19,6 +25,25 @@ void Simulation::run(){
     printStudentTimeNeeded();
     printStudentArrivalTime();
     createQueue();
+    createWindow();
+    int round = 1;
+
+    while(true){
+
+
+        //fill up the emtpy windows
+        while((!myQueue->isEmpty()) && (myWindow->getNumOpenWindows() != 0) && (myQueue->theList->front->data->arrivalTick <= clockTick)){
+                myWindow->fillWindow(myQueue->remove());
+        }
+        clockTick++;
+        for(int i = 0; i < myWindow)
+
+    }
+
+
+
+    myWindow->printWindows();
+
 }
 
 void Simulation::readFile()
@@ -90,21 +115,45 @@ void Simulation::printStudentArrivalTime(){
 
 void Simulation::createQueue(){
     myQueue = new GenQueue<Student>();
+    //
+    // s = new Student(vectorTimePerStudent.at(0), vectorTimeArrived.at(0));
+    // myQueue->insert(s);
+    // s1 = new Student(vectorTimePerStudent.at(1), vectorTimeArrived.at(1));
+    // myQueue->insert(s1);
+    //
+    // s2 = new Student(vectorTimePerStudent.at(2), vectorTimeArrived.at(2));
+    // myQueue->insert(s2);
+    //
+    // s3 = new Student(vectorTimePerStudent.at(3), vectorTimeArrived.at(3));
+    // myQueue->insert(s3);
+    //
+    // s4 = new Student(vectorTimePerStudent.at(4), vectorTimeArrived.at(4));
+    // myQueue->insert(s4);
+    //
+    // for(int i = 0; i <totalNumStudents; i++){
+    //     cout << endl;
+    //     cout <<  "Student " << i + 1 << ":\nTime needed at window: " << myQueue->remove()->timeNeeded << endl;
+    //     //cout << "Student " << i + 1 << ":\nTime needed at window: " << myQueue->theList->front->data->timeNeeded << endl;
+    //     //cout << "Arrival clock tick: " << myQueue->theList->front->data->arrivalTick << endl;
+    // }
 
 
-    //this is just to check the queue
     for(int i = 0; i < totalNumStudents; ++i ){
         s = new Student(vectorTimePerStudent.at(i), vectorTimeArrived.at(i));
         myQueue->insert(s);
-        cout << endl;
-        cout << "Student " << i + 1 << ":\nTime needed at window: " << myQueue->theList->front->data->timeNeeded << endl;
-        cout << "Arrival clock tick: " << myQueue->theList->front->data->arrivalClick << endl;
-        delete s;
+        // cout << endl;
+        // cout << "Student " << i + 1 << ":\nTime needed at window: " << myQueue->theList->front->data->timeNeeded << endl;
+        // cout << "Arrival clock tick: " << myQueue->theList->front->data->arrivalTick << endl;
+        //delete s;
     }
+    // for(int i = 0; i <totalNumStudents; i++){
+    //     cout << endl;
+    //     cout <<  "Student " << i + 1 << ":\nTime needed at window: " << myQueue->remove()->timeNeeded << endl;
+    // }
 
 }
 
 void Simulation::createWindow(){
-    // myWindow = new Window(numOpenWindows);
-    //
+    myWindow = new Window(numOpenWindows);
+
 }

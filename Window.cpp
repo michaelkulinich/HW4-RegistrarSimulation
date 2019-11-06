@@ -11,7 +11,6 @@ Window::Window(int numWindows)
     for (int i = 0; i < arrSize; ++i)
     {
         windowArray[i] = 0;
-        cout << windowArray[i] << endl;
     }
 }
 
@@ -22,7 +21,7 @@ Window::~Window()
 
 int Window::getNumOpenWindows()
 {
-  int numOpen;
+  int numOpen = 0;
   for (int i = 0; i < arrSize; ++i)
   {
     if (windowArray[i] == 0)

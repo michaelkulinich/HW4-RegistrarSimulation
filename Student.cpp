@@ -5,9 +5,9 @@ using namespace std;
 // Student::Student(){
 //
 // }
-Student::Student(int timeNeeded, int arrivalClick){
+Student::Student(int timeNeeded, int arrivalTick){
     this->timeNeeded = timeNeeded;
-    this->arrivalClick = arrivalClick;
+    this->arrivalTick = arrivalTick;
     idleTime = 0;
 }
 

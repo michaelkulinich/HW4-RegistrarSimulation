@@ -1,8 +1,8 @@
 //#include "Student.h"
-#include "Window.h"
+//#include "Window.h"
 // #include "GenQueue.h"
 //#include "DoublyListNode.h"
-//#include "Simulation.h"
+#include "Simulation.h"
 #include <iostream>
 
 using namespace std;
@@ -14,19 +14,25 @@ int main(int argc, char const *argv[]) {
     // cout << myStudent.arrivalClick << endl;
 
 
-    Window myWindow(5);
-    Student *myStudent = new Student(5,10);
-    Student *myStudent1 = new Student(6,10);
-    Student *myStudent2 = new Student(7,10);
-    myWindow.fillWindow(myStudent);
-    myWindow.fillWindow(myStudent1);
-    myWindow.fillWindow(myStudent2);
+    // Window myWindow(5);
 
-    myWindow.printWindows();
-    cout << "h" << endl;
-    // Simulation mySim(argv[1]);
-    // mySim.run();
+
+    // Student *myStudent = new Student(5,10);
+    // Student *myStudent1 = new Student(6,10);
+    // Student *myStudent2 = new Student(7,10);
+
+
+
+
+    // myWindow.fillWindow(myStudent);
+    // myWindow.fillWindow(myStudent1);
+    // myWindow.fillWindow(myStudent2);
     //
+    // myWindow.printWindows();
+    // cout << "h" << endl;
+    Simulation mySim(argv[1]);
+    mySim.run();
+
     //
     // mySim.readFile();
     //
