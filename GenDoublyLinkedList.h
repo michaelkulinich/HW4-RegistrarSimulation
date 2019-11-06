@@ -18,7 +18,7 @@ class GenDoublyLinkedList{
 
     void insertFront(T d);
     void insertBack(T *d);
-    T removeFront();
+    T* removeFront();
     T removeBack();
   //  int deletePos(int pos);// aka removeAt()
     int find(T d); //aka contains()
@@ -100,7 +100,7 @@ void GenDoublyLinkedList<T>::insertBack(T *d){
 
 
 template<class T>
-T GenDoublyLinkedList<T>::removeFront(){
+T* GenDoublyLinkedList<T>::removeFront(){
     //check if empty before attempting to remove
     if(isEmpty()){
         cout << "list is empty" << endl;
@@ -118,7 +118,7 @@ T GenDoublyLinkedList<T>::removeFront(){
         front->next->prev = NULL; //the pointer (prev) to front is null
     }
     front = front->next;
-    T temp = ft->data;
+    T *temp = ft->data;
     ft->next = NULL;
     delete ft;
     --size;

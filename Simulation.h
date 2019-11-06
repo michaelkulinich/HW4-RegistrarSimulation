@@ -32,6 +32,7 @@ class Simulation {
         int lineCount;
         int openWindows;
     private:
+        int totalStudentWaitTime;
         string inputFile;
         int clockTick; // the clock tick of the simulation
         int numOpenWindows;
@@ -43,6 +44,13 @@ class Simulation {
         Window *myWindow;
         GenQueue<Student> *myQueue;
         Student *s;
+
+
+        Student *s1;
+        Student *s2;
+        Student *s3;
+        Student *s4;
+
 
 
 

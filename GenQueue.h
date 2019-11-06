@@ -13,10 +13,10 @@ public:
 
     //core functions
     void insert(T *d);
-    T remove();
+    T* remove();
 
     //aux functions
-    T peek();
+    T* peek();
     bool isEmpty();
     int getSize();
     void printQueue();
@@ -47,19 +47,19 @@ void GenQueue<T>::insert(T *d){
 }
 
 template <class T>
-T GenQueue<T>::remove(){
+T* GenQueue<T>::remove(){
     //error checking
     if(isEmpty()){
         cout << "queue is empty" << endl;
         exit(1);
     }
-    T c = theList->removeFront();
+    T *c = theList->removeFront();
     size--;
     return c;
 }
 
 template <class T>
-T GenQueue<T>::peek(){
+T* GenQueue<T>::peek(){
     return theList->front->data;
 }
 

@@ -45,13 +45,13 @@ int main(int argc, char const *argv[]) {
 
 
 
-
-     // GenQueue<Student> *myQueue = new GenQueue<Student>();
-     // Student *myStudent = new Student(123);
-     // myQueue->insert(myStudent);
-     // cout << myQueue->theList->front->data->getId() << endl; //basically a peak
      //
-
+     // GenQueue<Student> *myQueue = new GenQueue<Student>();
+     // Student *myStudent = new Student(1, 2);
+     // myQueue->insert(myStudent);
+     // cout << myQueue->peek()->arrivalTick << endl; //basically a peak
+     //
+     //
 
 
 

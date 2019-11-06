@@ -13,7 +13,7 @@ CHange this Every where I do this
 */
 Simulation::Simulation(string inputFile){//input file
     this->inputFile = inputFile;
-    clockTick = 0;
+    clockTick = 3;
 }
 Simulation::~Simulation(){
 
@@ -28,17 +28,19 @@ void Simulation::run(){
     createWindow();
     int round = 1;
 
-    while(true){
+
+//    while(true){
 
 
         //fill up the emtpy windows
-        while((!myQueue->isEmpty()) && (myWindow->getNumOpenWindows() != 0) && (myQueue->theList->front->data->arrivalTick <= clockTick)){
+        while((!myQueue->isEmpty()) && (myWindow->getNumOpenWindows() != 0) && (myQueue->peek()->arrivalTick <= clockTick)){
+
                 myWindow->fillWindow(myQueue->remove());
         }
         clockTick++;
-        for(int i = 0; i < myWindow)
 
-    }
+
+//    }
 
 
 
