@@ -1,16 +1,18 @@
-#include<iostream>
+//#include<iostream>
 #include "Window.h"
+
 
 using namespace std;
 
 Window::Window(int numWindows)
 {
-  int arrSize = numWindows;
-  windowArray = new int[numWindows];
-  for (int i = 0; i < arrSize; ++i)
-  {
-    windowArray[i] = 0;
-}
+    arrSize = numWindows;
+    windowArray = new int[arrSize];
+    for (int i = 0; i < arrSize; ++i)
+    {
+        windowArray[i] = 0;
+        cout << windowArray[i] << endl;
+    }
 }
 
 Window::~Window()
@@ -18,7 +20,7 @@ Window::~Window()
 
 }
 
-int Window::getOpenWindows()
+int Window::getNumOpenWindows()
 {
   int numOpen;
   for (int i = 0; i < arrSize; ++i)
@@ -39,5 +41,12 @@ void Window::fillWindow(Student *S){ //put in the student into the window
           windowArray[i] = S->timeNeeded;
           break;
       }
+    }
+}
+
+void Window::printWindows(){
+    for (int i = 0; i < arrSize; ++i)
+    {
+        cout << "Student: " <<i+1 << " Time needed: " << windowArray[i] << endl;
     }
 }

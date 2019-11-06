@@ -1,6 +1,7 @@
 #include<iostream>
 #include "Student.h"
 
+
 using namespace std;
 
 class Window
@@ -9,10 +10,14 @@ class Window
     Window(int numWindows);
     ~Window();
 
-    int getOpenWindows();
+    int getNumOpenWindows();
     void fillWindow(Student *s);
+    void printWindows();
+
+
 
     int idleTime;
-    int arrSize;
     int *windowArray;
+    int arrSize;
+
 };
