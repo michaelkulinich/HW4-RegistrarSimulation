@@ -3,17 +3,19 @@
 using namespace std;
 
 class Student {
-public:
+    public:
         //Student();
-        Student(int d);
+        Student(int timeNeeded, int arrivalClick);
         ~Student();
 
+        //methods
+        
 
-        int getId();
+        //variables
         int idleTime;
-        int windowTime;
+        int timeNeeded;
         int arrivalClick;
 
-        int id;
+
 
 };

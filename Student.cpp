@@ -5,14 +5,12 @@ using namespace std;
 // Student::Student(){
 //
 // }
-Student::Student(int d){
-    id = d;
+Student::Student(int timeNeeded, int arrivalClick){
+    this->timeNeeded = timeNeeded;
+    this->arrivalClick = arrivalClick;
+    idleTime = 0;
 }
 
 Student::~Student(){
 
-}
-
-int Student::getId(){
-    return id;
 }

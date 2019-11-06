@@ -1,4 +1,5 @@
 #include<iostream>
+#include "Student.h"
 
 using namespace std;
 
@@ -9,6 +10,7 @@ class Window
     ~Window();
 
     int getOpenWindows();
+    void fillWindow(Student *s);
 
     int idleTime;
     int arrSize;

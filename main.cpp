@@ -1,21 +1,42 @@
-#include "Student.h"
-#include "GenQueue.h"
-
-
+// #include "Student.h"
+// #include "GenQueue.h"
 //#include "DoublyListNode.h"
+#include "Simulation.h"
 #include <iostream>
 
 using namespace std;
 
-int main(){
+int main(int argc, char const *argv[]) {
+
+    // Student myStudent(5, 10);
+    // cout << myStudent.timeNeeded << endl;
+    // cout << myStudent.arrivalClick << endl;
+
+
+    Window myWindow(5);
+    Student *myStudent = new Student(5,10);
+    myWindow.fillWindow(myStudent);
+    // Simulation mySim(argv[1]);
+    // mySim.run();
+    //
+    //
+    // mySim.readFile();
+    //
+    // mySim.analyzeFileInfo();
+    // mySim.printStudentTimeNeeded();
+    // mySim.printStudentArrivalTime();
+    //
+    // mySim.createQueue();
 
 
 
-     GenQueue<Student> *myQueue = new GenQueue<Student>();
-     Student *myStudent = new Student(123);
-     myQueue->insert(myStudent);
-     cout << myQueue->theList->front->data->getId() << endl; //basically a peak
 
+
+     // GenQueue<Student> *myQueue = new GenQueue<Student>();
+     // Student *myStudent = new Student(123);
+     // myQueue->insert(myStudent);
+     // cout << myQueue->theList->front->data->getId() << endl; //basically a peak
+     //
 
 
 
