@@ -32,7 +32,8 @@ issues:
 
 Instructions to run:
   make all
-  ./HW4_RegistrarSimulation
+  ./HW4_RegistrarSimulation (testFile.txt)
+
 
 Comments:
 number of windows idle over 5 minutes. we interpreted this as how many windows had a total idle time of over 5 minutes, not when it is continuous 5 minutes
