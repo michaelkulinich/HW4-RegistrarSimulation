@@ -60,6 +60,10 @@ T* GenQueue<T>::remove(){
 
 template <class T>
 T* GenQueue<T>::peek(){
+    if(size == 0){
+        cout << "queue is empty, cant peek" << endl;
+        exit(1);
+    }
     return theList->front->data;
 }
 

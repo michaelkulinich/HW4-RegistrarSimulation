@@ -46,6 +46,18 @@ void Window::fillWindow(Student *S){ //put in the student into the window
 void Window::printWindows(){
     for (int i = 0; i < arrSize; ++i)
     {
-        cout << "Student: " <<i+1 << " Time needed: " << windowArray[i] << endl;
+        cout << "Window: " <<i+1 << " Time needed: " << windowArray[i] << endl;
+    }
+}
+
+bool Window::windowsEmpty()
+{
+    for (int i = 0; i < arrSize; ++i)
+    {
+        if (windowArray[i] != 0)
+        return false;
+
+        else
+        return true;
     }
 }
