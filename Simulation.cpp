@@ -1,17 +1,21 @@
+/*Michael Kulinich
+2328386
+kulinich@chapman.edu
+Matthew Nwerem
+2277158
+nwere100@mail.chapman.edu
+
+
+FileHelper.cpp
+*/
+
 #include "Simulation.h"
 #include <vector>
 #include <algorithm>
-//#include "Student.h"
+
 
 using namespace std;
 
-
-
-
-/*
-myQueue->theList->front->data->timeNeeded
-CHange this Every where I do this
-*/
 Simulation::Simulation(string inputFile){//input file
     this->inputFile = inputFile;
 }
@@ -23,8 +27,6 @@ Simulation::~Simulation(){
 void Simulation::run(){
     readFile();
     analyzeFileInfo();
-    printStudentTimeNeeded();
-    printStudentArrivalTime();
     createQueue();
     createWindow();
     int round = 1;
@@ -35,31 +37,28 @@ void Simulation::run(){
 
 
     while(!myQueue->isEmpty()){
-        // cout << "numWindows open " << myWindow->getNumOpenWindows() << endl;
-        // cout << "ArrivalTick " << myQueue->peek()->arrivalTick << endl;
-
-        //fill up the emtpy windows
 
 
+        //while to fill up the emtpy windows for the students that have arrived at or before the clock tick
         while((!myQueue->isEmpty()) && (myWindow->getNumOpenWindows() != 0) && (myQueue->peek()->arrivalTick <= clockTick)){
 
-            //when theres multiple windows, say 5, and 5 students all come at time 0
-            //it will add one student at a time, not exit the while loop tho,
-            //so clocktick stays the same
+            //fill any windows that are open with the
             myWindow->fillWindow(myQueue->peek());
-            //to find the median of all the wait times
+
+            //vector used to find the median of all the wait times
             vectorStudentWaitTimes.push_back(myQueue->peek()->arrivalTick);
             //if the a window is open, increase it window idle time
 
             //
             //regarding student variables
             //
+
             //checking for max wait time of student
             if(clockTick-(myQueue->peek()->arrivalTick) > maxWaitTime){
                 maxWaitTime = clockTick-(myQueue->peek()->arrivalTick);
             }
 
-            //chekcing for number of students waiting over 10 minutes
+            //cheching for number of students waiting over 10 minutes
             if(clockTick-(myQueue->peek()->arrivalTick ) >= 10){
                 tenMinuteWaitTime++;
             }
@@ -69,7 +68,12 @@ void Simulation::run(){
 
             //remove the student from the queue
             myQueue->remove();
+
+            //once all of the students that can go into the windows
+            //at the current clock tick have went, we incriment the number
+            //of idle winodws if there are any
             if(!myQueue->isEmpty()){
+                //if we got every student that has arrived has entered
                 if(myQueue->peek()->arrivalTick > clockTick){
                     for(unsigned int i = 0; i < myWindow->arrSize; i++){
                         if(myWindow->windowArray[i] == 0){
@@ -78,8 +82,6 @@ void Simulation::run(){
                     }
                 }
             }
-
-
         }
 
 
@@ -118,9 +120,8 @@ void Simulation::run(){
     //
     //
     sort(vectorStudentWaitTimes.begin(), vectorStudentWaitTimes.end());
-    int size = vectorStudentWaitTimes.size();   // might have to make this unsigned
+    int size = vectorStudentWaitTimes.size();
     //then find median
-    // cout << "check 3" << endl;
     medianStudentWaitTime = vectorStudentWaitTimes.at((size -1)/ 2);
     meanStudentWaitTime = double(totalStudentWaitTime)/double(totalNumStudents);
 
@@ -155,7 +156,6 @@ void Simulation::run(){
     cout << "totalWindowIdleTime: " << totalWindowIdleTime << endl;
     cout <<  "maxWindowIdleTime: " << maxWindowIdleTime << endl;
     cout << "meanWindowIdleTime: " << meanWindowIdleTime << endl;
-    // cout << "clock tick" << clockTick << endl;
 
 }
 
@@ -198,6 +198,8 @@ void Simulation::analyzeFileInfo(){
                 indexNumStudents += numStudents + 2;
                 numStudents = vectorFileInfo.at(indexNumStudents);
             }
+
+            //once we read the whole file, total up the students and break
             else{
                 totalNumStudents = total;
                 break;
@@ -210,7 +212,6 @@ void Simulation::analyzeFileInfo(){
     }
 }
 
- // change the parameter to totalNumStudents for for loop
 void Simulation::printStudentTimeNeeded(){
     cout << "Time needed for each student:\n";
     for(int i = 0; i < totalNumStudents; i++){
@@ -228,42 +229,10 @@ void Simulation::printStudentArrivalTime(){
 
 void Simulation::createQueue(){
     myQueue = new GenQueue<Student>();
-    //
-    // s = new Student(vectorTimePerStudent.at(0), vectorTimeArrived.at(0));
-    // myQueue->insert(s);
-    // s1 = new Student(vectorTimePerStudent.at(1), vectorTimeArrived.at(1));
-    // myQueue->insert(s1);
-    //
-    // s2 = new Student(vectorTimePerStudent.at(2), vectorTimeArrived.at(2));
-    // myQueue->insert(s2);
-    //
-    // s3 = new Student(vectorTimePerStudent.at(3), vectorTimeArrived.at(3));
-    // myQueue->insert(s3);
-    //
-    // s4 = new Student(vectorTimePerStudent.at(4), vectorTimeArrived.at(4));
-    // myQueue->insert(s4);
-    //
-    // for(int i = 0; i <totalNumStudents; i++){
-    //     cout << endl;
-    //     cout <<  "Student " << i + 1 << ":\nTime needed at window: " << myQueue->remove()->timeNeeded << endl;
-    //     //cout << "Student " << i + 1 << ":\nTime needed at window: " << myQueue->theList->front->data->timeNeeded << endl;
-    //     //cout << "Arrival clock tick: " << myQueue->theList->front->data->arrivalTick << endl;
-    // }
-
-
     for(int i = 0; i < totalNumStudents; ++i ){
         s = new Student(vectorTimePerStudent.at(i), vectorTimeArrived.at(i));
         myQueue->insert(s);
-        // cout << endl;
-        // cout << "Student " << i + 1 << ":\nTime needed at window: " << myQueue->theList->front->data->timeNeeded << endl;
-        // cout << "Arrival clock tick: " << myQueue->theList->front->data->arrivalTick << endl;
-        //delete s;
     }
-    // for(int i = 0; i <totalNumStudents; i++){
-    //     cout << endl;
-    //     cout <<  "Student " << i + 1 << ":\nTime needed at window: " << myQueue->remove()->timeNeeded << endl;
-    // }
-
 }
 
 void Simulation::createWindow(){
@@ -271,6 +240,4 @@ void Simulation::createWindow(){
     for(int i = 0; i < numOpenWindows; ++i){
         vectorWindowIdleTimes.push_back(0);
     }
-
-
 }
