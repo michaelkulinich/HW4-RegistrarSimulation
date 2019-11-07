@@ -16,7 +16,8 @@ Simulation::Simulation(string inputFile){//input file
     this->inputFile = inputFile;
 }
 Simulation::~Simulation(){
-
+    delete s;
+    delete myWindow;
 }
 
 void Simulation::run(){

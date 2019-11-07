@@ -38,7 +38,7 @@ GenQueue<T>::GenQueue(){
 
 template <class T>
 GenQueue<T>::~GenQueue(){
-  //figure it out
+  delete theList;
 }
 template <class T>
 void GenQueue<T>::insert(T *d){
