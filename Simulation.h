@@ -40,6 +40,7 @@ class Simulation {
         int totalWindowIdleTime;
         int maxWindowIdleTime;
         double meanWindowIdleTime;
+        int numWindowsFiveMinuteIdleTime;
         string inputFile;
         int clockTick; // the clock tick of the simulation
         int numOpenWindows;

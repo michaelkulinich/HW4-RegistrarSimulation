@@ -68,10 +68,8 @@ void Simulation::run(){
 
             //sum up the total student wait time
             totalStudentWaitTime += clockTick-myQueue->peek()->arrivalTick;
-            cout << "TIME WAITED FOR STUDENT:      " << clockTick-myQueue->peek()->arrivalTick << endl;
-            cout << "clock tick:    " << clockTick << endl;
-            cout << "arrival tick:   " << myQueue->peek()->arrivalTick << endl;
-        //    myWindow->fillWindow(myQueue->remove());
+
+            //remove the student from the queue
             myQueue->remove();
 
 
@@ -79,8 +77,6 @@ void Simulation::run(){
 
 
         clockTick++;
-
-
         for(int i = 0; i < myWindow->arrSize; ++i){
             //if all no students are ready to come into the windows
             //then increase the window idle times
@@ -97,7 +93,6 @@ void Simulation::run(){
     }
 
     //once the queue is empty, then now only the window has students
-
     while(!myWindow->windowsEmpty()){
         for(unsigned int i = 0; i < myWindow->arrSize; i++){
             //we increase each windows idle time
@@ -109,17 +104,13 @@ void Simulation::run(){
                 myWindow->windowArray[i]--;
             }
         }
-
-
     }
     //
     //
     //regarding student variables
     //
     //
-    // cout << "check 1" << endl;
     sort(vectorStudentWaitTimes.begin(), vectorStudentWaitTimes.end());
-    // cout << "check 2" << endl;
     int size = vectorStudentWaitTimes.size();   // might have to make this unsigned
     //then find median
     // cout << "check 3" << endl;
@@ -133,6 +124,7 @@ void Simulation::run(){
 
     //gets the totalWindowIdleTime
     maxWindowIdleTime = 0;
+    numWindowsFiveMinuteIdleTime = 0;
     for(int i = 0; i < vectorWindowIdleTimes.size(); i++){
         //find the total
         totalWindowIdleTime += vectorWindowIdleTimes.at(i);
@@ -141,13 +133,12 @@ void Simulation::run(){
         if(maxWindowIdleTime < vectorWindowIdleTimes.at(i)){
             maxWindowIdleTime = vectorWindowIdleTimes.at(i);
         }
+
+        if(vectorWindowIdleTimes.at(i) >= 5){
+            numWindowsFiveMinuteIdleTime++;
+        }
     }
     meanWindowIdleTime = double(totalWindowIdleTime)/double(myWindow->arrSize);
-
-
-
-
-    myWindow->printWindows();
 
     cout << "totalStudentWaitTime: " << totalStudentWaitTime << endl ;
     cout << "tenMinuteWaitTime: " << tenMinuteWaitTime << endl;
