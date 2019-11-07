@@ -73,8 +73,6 @@ bool Window::windowsEmpty()
     {
         if (windowArray[i] != 0)
         return false;
-
-        else
-        return true;
     }
+    return false;
 }
