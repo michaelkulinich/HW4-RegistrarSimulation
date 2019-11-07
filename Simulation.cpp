@@ -42,16 +42,13 @@ void Simulation::run(){
 
         while((!myQueue->isEmpty()) && (myWindow->getNumOpenWindows() != 0) && (myQueue->peek()->arrivalTick <= clockTick)){
 
-
+            //when theres multiple windows, say 5, and 5 students all come at time 0
+            //it will add one student at a time, not exit the while loop tho,
+            //so clocktick stays the same
             myWindow->fillWindow(myQueue->peek());
             //to find the median of all the wait times
             vectorStudentWaitTimes.push_back(myQueue->peek()->arrivalTick);
             //if the a window is open, increase it window idle time
-            for(unsigned int i = 0; i < myWindow->arrSize; i++){
-                if(myWindow->windowArray[i] == 0){
-                    vectorWindowIdleTimes.at(i)++;
-                }
-            }
 
             //
             //regarding student variables
@@ -71,6 +68,15 @@ void Simulation::run(){
 
             //remove the student from the queue
             myQueue->remove();
+            if(!myQueue->isEmpty()){
+                if(myQueue->peek()->arrivalTick > clockTick){
+                    for(unsigned int i = 0; i < myWindow->arrSize; i++){
+                        if(myWindow->windowArray[i] == 0){
+                            vectorWindowIdleTimes.at(i)++;
+                        }
+                    }
+                }
+            }
 
 
         }
